@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{msg}}
+			<my-header>
+				<button slot='left' @click="left">左按钮</button>
+				<button slot='right'>右按钮</button>
+			</my-header>
+		</div>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el:"#app",
+				data: {
+					msg: 'hello'
+				},
+				components: {
+					'my-header': {
+						template: `<div><slot name='left'></slot><span @click='right'>大标题</span><slot name='right'></slot></div>`,
+						methods: {
+							right: function() {
+								console.log(this)
+							}
+						}
+					}
+				},
+				methods: {
+					left: function() {
+						console.log(this)
+					}
+				},
+			})
+			//.$mount('#app')
+
+			vm.msg = "new msg";
+
+			console.log(vm.$el.textContent.trim() === "new msg");
+
+			vm.$nextTick(function() {
+				console.log(vm.$el.textContent.trim() === "new msg")
+			})
+		</script>
+	</body>
+</html>

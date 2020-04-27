@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<input type="text" name="" id="" value="" style="ime-mode:disabled" />
+		<script type="text/javascript">
+			$("input").on('keydown',function (e) {
+				if (e.keyCode != 13 && e.keycode != 32) {
+					return false;
+				}else{
+					alert('123')
+				}
+			});
+			
+		</script>
+	</body>
+</html>

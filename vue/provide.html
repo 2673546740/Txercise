@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{msg}}
+			<my-body></my-body>
+		</div>
+		<script type="text/javascript">
+			
+			//toFixed(2)四舍五入取最近的两位小数没有问题，但是toFixed(1)取最近的一位小数会出问题
+			console.log(12.446.toFixed(1))
+			console.log(12.456.toFixed(2))
+			console.log(Math.round(12.45 * 10)/10)
+
+			
+			var vm = new Vue({
+				data:{
+					msg:'hello',
+					people:{
+						name:'zhangsan',
+						age:24
+					}
+				},
+				watch:{
+					'people':{
+						handler:'show',
+						deep:true
+					}
+				},
+				methods:{
+					show(){
+						console.log(this.people);
+					}
+				},
+				components:{
+					'my-body':{
+						template:`<div>{{sum}}</br><my-header></my-header></div>`,
+						data:function () {
+							return {
+								sum:'demo'
+							}
+						},
+						provide:{
+							theNum:'demo'
+						},
+						components:{
+							'myHeader':{
+								template:`<span>{{thisNum}} + {{count}} </br><my-footer></my-footer></span>`,
+								inject:['theNum'],
+								data:function(){
+									return {
+										thisNum:this.theNum,
+										count:20
+									}
+								},
+								mounted:function () {
+									console.log(this.thisNum);
+									console.log(this)
+								},
+								components:{
+									'my-footer':{
+										template:`<div>{{name}}</div>`,
+										inject:['theNum'],
+										data:function () {
+											return {
+												name:this.theNum
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}).$mount('#app');
+			
+			/*vm.$watch('people',vm.show,{
+				deep:true
+			})*/
+			
+			vm.people.name = 'lisi'
+		</script>
+	</body>
+</html>

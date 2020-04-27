@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<button onclick="quanping()">全屏</button>
+		<button onclick="tuichuq()">退出全屏</button>
+		<script type="text/javascript">
+			var ob = {name:'zhangsan',age:12};
+
+			$.each(ob, function(key,val) {
+				Object.defineProperty(ob,key,{
+					get:function () {
+						console.log('被访问')
+					},
+					set:function (newVal) {
+						console.log('被修改'+newVal)
+					}
+				})
+			});
+			function quanping() {
+				 let main = document.body;
+				if (main.requestFullscreen) {
+                    main.requestFullscreen();
+                } else if (main.mozRequestFullScreen) {
+                    main.mozRequestFullScreen();
+                } else if (main.webkitRequestFullScreen) {
+                    main.webkitRequestFullScreen();
+                } else if (main.msRequestFullscreen) {
+                    main.msRequestFullscreen();
+                }
+			}
+			function tuichuq() {
+				 let main = document.body;
+				if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitCancelFullScreen) {
+                    document.webkitCancelFullScreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+			}
+		</script>
+	</body>
+</html>

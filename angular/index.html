@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="angular.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="angular-ui-router.js" type="text/javascript" charset="utf-8"></script>
+		<script src="index.js" type="text/javascript" charset="utf-8"></script>
+		<script src="appRoute.js" type="text/javascript" charset="utf-8"></script>
+		<script src="zhiling.js" type="text/javascript" charset="utf-8"></script>
+		<script src="fuwu.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<style type="text/css">
+		.content{
+			width: calc(100% - 200px);
+			height: calc(100% - 90px);
+			position: absolute;
+			top: 60px;
+			left: 200px;
+		}
+	</style>
+	<body ng-app="myApp" ng-controller="myCtl">
+		<div font-color ng-include="'header.html'"></div>
+		<div ng-include="'nav.html'"></div>
+		<!--<div ng-include="'content.html'"></div>-->
+		<div class="content" ui-view></div>
+		<div ng-include="'footer.html'"></div>
+		
+	</body>
+</html>
+<!--
+	主模块如果想要引入其他模块的内容，首先必须在合适的位置引入其他模块所在的js文件，第二在主模块所在的js文件中angular.module所在的位置依
+	赖其他模块的名字，如果依赖的模块是指令什么的作用在标签上的可以直接使用，如果是服务或者其他的什么，比如说是服务，那么就需要将服务中所携带的数据注入
+	到当前的作用域.
+	被包含进来的HTML可以使用此标签所在父元素的控制器
+-->

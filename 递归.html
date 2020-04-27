@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var arr = [1,2,3,[4,5,6,7,8,9,[10,11,12,[13,14,15,[16,17,18,19]]]]];
+			
+			var shuchu = function(arr){
+				for(let i in arr){
+					if(typeof arr[i] != 'object'){
+						console.log(arr[i])
+					}else{
+						shuchu(arr[i])
+					}
+				}
+			}
+			
+			var shuchu2 = function(arr){
+				var tempArr=arr;
+				for (var i=0;i<tempArr.length;i++) {
+					if(typeof tempArr[i] != 'object'){
+						console.log(tempArr[i])
+					}else{
+						tempArr=tempArr[i]
+						i=-1;
+					}
+				}
+			}
+			//shuchu(arr)
+			shuchu2(arr)
+		</script>
+	</body>
+</html>

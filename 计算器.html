@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="angular.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div ng-app="myapp" ng-controller="ctr1">
+			<input type="number" name="" ng-model="money1" id="" value="" />
+			+
+			<input type="number" name="" ng-model="money2" id="" value="" />
+			=
+			<div>{{money3}}</div>
+		</div>
+		<input type="checkbox" name="checked" id="checked" value="" />
+		<button>是否选中</button>
+	</body>
+</html>
+<script type="text/javascript">
+	angular.module('myapp', []).controller('ctr1',function ($scope) {
+		$scope.money3  = 3;
+	})
+	//判断复选框是否被选中
+	$('button').click(function () {
+		console.log($('#checked')[0].checked)
+	})
+</script>

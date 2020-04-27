@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="https://cdn.bootcss.com/driver.js/0.9.8/driver.min.css" rel="stylesheet">
+		<script src="https://cdn.bootcss.com/driver.js/0.9.8/driver.min.js"></script>
+	</head>
+
+	<body>
+		<div id="first">第一步</div>
+		<div id="second">第二步</div>
+		<div id="third">第三步</div>
+		<div id="four">第四步</div>
+		<button onclick="yindao()">引导</button>
+		<script type="text/javascript">
+			const steps = [
+				{
+					element: "#first",
+					popover: {
+						title: "菜单导航",
+						description: "点击菜单可切换右侧菜单内容",
+						position: "bottom"
+					}
+				},
+				{
+					element: "#second",
+					popover: {
+						title: "汉堡包",
+						description: "点击收缩和展开菜单导航",
+						position: "bottom"
+					},
+					padding: 5
+				},
+				{
+					element: "#third",
+					popover: {
+						title: "菜单导航",
+						description: "点击菜单可切换右侧菜单内容",
+						position: "bottom"
+					}
+				},
+				{
+					element: "#four",
+					popover: {
+						title: "汉堡包",
+						description: "点击收缩和展开菜单导航",
+						position: "bottom"
+					},
+					padding: 5
+				}
+			]
+			const driver = new Driver({
+				className: "scoped-class", // className to wrap driver.js popover
+				animate: true, // Animate while changing highlighted element
+				opacity: 0.75, // Background opacity (0 means only popovers and without overlay)
+				padding: 10, // Distance of element from around the edges
+				allowClose: true, // Whether clicking on overlay should close or not
+				overlayClickNext: false, // Should it move to next step on overlay click
+				doneBtnText: "完成", // Text on the final button
+				closeBtnText: "关闭", // Text on the close button for this step
+				nextBtnText: "下一步", // Next button text for this step
+				prevBtnText: "上一步" // Previous button text for this step
+			})
+			driver.defineSteps(steps)
+			driver.start()
+			//不能主动引导
+			function yindao() {
+				driver.defineSteps(steps)
+				driver.start()
+			}
+		</script>
+	</body>
+
+</html>

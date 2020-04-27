@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<style type="text/css">
+	</style>
+	<body>
+		<div>
+			<p>倒计时</p>
+			<span class="span1">5</span>
+			<span class="span2">5</span>
+			<button class="share">分享</button>
+		</div>
+		<button><a href="https://open.weixin.qq.com/connect/qrconnect?appid=wxb66b39659d5470fa&redirect_uri=REDIRECT_URI&response_type=code&scope=TjWaXSbdKLr0InIcDBZolQDXnROFePHf&state=STATE#wechat_redirect">微信登录</a></button>
+	</body>
+</html>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+	var totalTime1 = 5;
+	var totalTime2 = 5;
+	timers = setInterval(function () {
+		totalTime1--;
+		$('.span1').text(totalTime1);
+		if (totalTime1 == 0) {
+			clearInterval(timers);
+			timer2();
+		}
+	},1000)
+	timer2 = function () {
+		timers2 =  setInterval(function () {
+			totalTime2--;
+			$('.span2').text(totalTime2);
+			if (totalTime2 == 0) {
+				clearInterval(timers2);
+			}
+		},1000)
+	}
+</script>

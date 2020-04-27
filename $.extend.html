@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var obj1 = {
+				name:'zhangsan',
+				age:'23',
+				run:{
+					city:'zhengzhou'
+				}
+			}
+			
+			var obj2 = {
+				age:'24',
+				sex:'man',
+				run:{
+					pro:'henan'
+				}
+			}
+			//true表示是否要深拷贝，不同点看输出,默认是浅拷贝
+			console.log($.extend(obj1, obj2))
+			console.log($.extend(true,obj1, obj2))
+			console.log($.extend(false,obj1, obj2))
+			
+			/*(function ($) {
+				$.extend({
+					//获取url中的参数，使用方法$.fn.getURLParms();
+					//可以选择是否传入参数
+					getURLParms:function (url) {
+						if (url) {
+							var urls = url.split('?')[1].split('&');
+						}else{
+							var urls = window.location.href.split('?')[1].split('&');
+						}
+						var parms = {};
+						for (var i = 0 ; i < urls.length ; i++) {
+							parms[urls[i].split('=')[0]] = urls[i].split('=')[1];
+						}
+						return parms;
+					}
+				});
+			})(jQuery)*/
+			
+			//console.log($.getURLParms())
+		</script>
+	</body>
+</html>

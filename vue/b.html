@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<span></span>
+		<div></div>
+		
+		<form action="" method="post">
+			<input type="text" name="username" id="username" autocomplete="off" value="" />
+			<input type="text" name="psw" id="psw" value=""  autocomplete="off" />
+			<input type="submit" value="提交"/>
+		</form>
+		
+		<script type="text/javascript">
+			
+			$('form').submit(function (e) {
+				var data = $('form').serializeArray();
+				console.log(data)
+				e.preventDefault();
+			})
+			
+			/*(function ($) {
+				var ajax = new XMLHttpRequest();
+				ajax.open('POST','http://www.ai-emma.com:8081/user/getusers',true,{'pageIndex':1,'pageSize':10});
+				ajax.send();
+				ajax.onreadystatechange = function () {
+					if (ajax.readyState == 4 && ajax.status == 200) {
+						console.log('请求完成')
+					}
+				}
+			})(jQuery)*/
+			
+			/*(function ($) {
+				$.extend({
+					formatTime:function (option) {
+						//传入time，str两个参数
+						var time = option.time || new Date();
+						var str  = option.str  || '-';
+						var times = new Date(time);
+						var year = times.getFullYear();
+						var month= times.getMonth()+1;
+						var day =  times.getDate();
+						
+						return year+str+month+str+day
+					}
+				});
+			})(jQuery)
+			console.log($.formatTime({}));
+			console.log($.formatTime({'time':'2018-4-5','str':'/'}))
+			
+			
+			var obj1 = {
+				name:'李四',
+				smking:function (age) {
+					console.log(this.name+'正在抽烟……'+age)
+				}
+			};
+			var obj2 = {
+				name:'张三',
+				drink:function (age) {
+					console.log(this.name+'正在喝酒……'+age)
+				}
+			}
+			obj2.drink(20)
+			obj2.drink.call(obj1,23)
+			obj1.smking(21)
+			obj1.smking.apply(obj2,[24])
+			
+			
+			function run(year) {
+				if((year * 1 % 4 == 0) && (year * 1 % 100 != 0 || year * 1 % 400 == 0)){
+					console.log('瑞年')
+				}
+			}
+			run('1900')
+			
+			console.log(window)*/
+		</script>
+	</body>
+</html>

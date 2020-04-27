@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div>
+			<input type="text" name="" id="" value="" />
+			<button>按钮</button>
+		</div>
+		<script type="text/javascript">
+			
+			
+			var str = '123.12.3';
+			console.log(str.replace(/\./g,''))
+			
+			
+			var people = {
+				name:'zhangsan',
+				age :'23',
+				sex :'man',
+			}
+			console.log(Object.keys(people))
+			console.log(Object.entries(people))
+			
+			if (false) {
+				console.log(111)
+			}
+			if ('false') {
+				console.log(222)
+			}
+			
+			//字符串补位
+			$('input').blur(function () {
+				let str = $(this).val().padStart(5,'a');
+				let Str = $(this).val().padEnd(5,'a');
+				console.log(str)
+				console.log(Str)
+			})
+			
+			console.log(0.1+0.2 == 0.3)
+			console.log(0.1+0.2)
+			console.log(0.1*0.2)
+			
+			let s1 = Symbol('foo');
+			let s2 = Symbol('foo');
+			console.log(s1 == s2)//false
+			
+			
+			//克隆对象
+			var obj = {
+				'name':'zhangsan',
+				'age' : '23',
+				'sex' : {
+					'name':'lisi',
+					'age' :'23'
+				}
+			}
+			
+			var a = {};
+			
+			Object.assign(a,obj)
+			console.log(a)
+			
+			//数组去重
+			var a = [1,1,2,3,3,'我','我',{name:'zhangsan'},{name:'zhangsan'},[1],[1]];
+			console.log(...new Set(a))
+			
+			//两个数交换位置
+			var a1 = 3;
+				b1 = 4;
+			[a1, b1] = [b1, a1]
+			console.log(a1,b1)
+		</script>
+		<!--<script src="js/a.js" type="module" charset="utf-8"></script>也可以这样引入module-->
+		<script type="module">
+			import { a , b , person} from './js/b.js';
+			a();
+			b();
+			console.log(person.name)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,26 @@
+app.config(['$stateProvider','$urlRouterProvider',function ($stateProvider,$urlRouterProvider) {
+	$urlRouterProvider.otherwise('/home');
+	$stateProvider.state('home',{
+		url:'/home',
+		templateUrl:'router/home.html'
+	})
+	.state('shangpin',{
+		url:'/shangpin/:id',
+		templateUrl:'router/shangpin.html',
+		controller:'shangpinCtl'
+	})
+	.state('shangjia',{
+		url:'/shangjia',
+		templateUrl:'router/shangjia.html'
+	})
+	.state('pinpai',{
+		url:'/pinpai',
+		templateUrl:'router/pinpai.html',
+		controller:'pinpaiCtl'
+	})
+	.state('pinpai.shangjia',{
+		url:'/pinpai.shangjia',
+		templateUrl:'router/pinpaishangjia.html',
+		controller:'pinpaiCtl'
+	})
+}])

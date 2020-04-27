@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{name}}
+			<br />
+			<template v-if="show">
+				<label for="userName">userName</label>
+				<input type="text" name="userName" key='userName' autocomplete="off" placeholder="用户名" id="userName" value="" />
+			</template>
+			
+			<template v-else>
+				<label for="Email">Email</label>
+				<input type="text" name="Email" key='Email' autocomplete="off" placeholder="Email" id="Email" value="" />
+			</template>
+			
+			<button @click="change()">切换</button><br />
+			
+			<div>
+				<ul>
+					<li @click="changeComponent(value.name)" v-for="(value,index) in allComponent">{{value.value}}</li>
+				</ul>
+				<home-component v-bind:is='currentComponent'></home-component>
+			</div>
+		</div>
+		<script type="text/javascript">
+			Vue.component('home-component',{
+				template:'<div>首页</div>'
+			})
+			Vue.component('list-component',{
+				template:'<div>列表</div>'
+			})
+			Vue.component('produce-component',{
+				template:'<div>商品</div>'
+			})
+			var vm = new Vue({
+				data:{
+					name:'zhangsan',
+					show:false,
+					allComponent:[
+						{name:'home-component',value:'首页'},
+						{name:'list-component',value:'列表'},
+						{name:'produce-component',value:'商品'}
+					],
+					currentComponent:'home-component'
+				},
+				methods:{
+					change:function () {
+						this.show = this.show == true ? false : true;
+					},
+					changeComponent:function (val) {
+						this.currentComponent = val;
+					}
+				}
+			}).$mount('#app');
+			
+		</script>
+	</body>
+</html>

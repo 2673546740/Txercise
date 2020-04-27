@@ -1,0 +1,27 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.active{
+	width: 1024px;
+	height: auto;
+	border: 1px solid red;
+	margin: 50px auto;
+}
+.active h2{
+	text-align: center;
+}
+.active table{
+	width: 100%;
+	border-collapse: collapse;
+}
+.active table th,.active table td{
+	height: 30px;
+	line-height: 30px;
+}
+.active table td:nth-child(n+3){
+	width: 200px;
+}
+.danwei{
+	word-spacing: 10px;
+}

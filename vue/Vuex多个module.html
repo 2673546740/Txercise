@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="vuex.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{msg}}</br>
+			{{sum}}</br>
+			{{count}}
+		</div>
+		<script type="text/javascript">
+			var moduleA = {
+				state:{
+					numA : 0
+				},
+				mutations:{
+					add(state){
+						state.numA++
+					},
+					reduce(state){
+						state.numA--
+					}
+				}
+			};
+			var moduleB = {
+				state:{
+					numB : 1
+				},
+				mutations:{
+					add(state){
+						state.numB++
+					},
+					reduce(state){
+						state.numB--
+					}
+				}
+			};
+			var store = new Vuex.Store({
+				modules:{
+					a:moduleA,
+					b:moduleB
+				}
+			});
+			var vm = new Vue({
+				data:{
+					msg:'123'
+				},
+				computed:{
+					sum(){
+						return store.state.a.numA
+					},
+					count(){
+						return store.state.b.numB
+					}
+				}
+			}).$mount('#app');
+		</script>
+	</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div id="app">
+		{{msg}}
+		<my-header></my-header>
+		<my-body></my-body>
+		<div>{{time | formatTime}}</div>
+		
+		<div v-fontcolor="{color:'red',fontSize:'15'}">{{num | Upcase(2)}}</div>
+		<div v-fontcolor="{color:'',fontSize:''}">{{num}}</div>
+	</div>
+	<script type="text/javascript">
+		
+		//用空实例的方法进行兄弟便签之间的通信
+		var newVm = new Vue();
+		
+		Vue.filter('formatTime',function (val) {
+			if(!val) return ''
+			var time = new Date(val);
+			var Y = time.getFullYear();
+			var M = time.getMonth()+1;
+			var D = time.getDate();
+			return Y+'-'+M+'-'+D;
+		})
+		Vue.filter('Upcase',function (val,arg1) {
+			console.log(val);
+			console.log(arg1);
+			if(!val) return ''
+			return Number(val).toFixed(arg1);
+		})
+		Vue.directive('fontcolor',function (el,binding,vnode) {
+			console.log(el);
+			console.log(binding);
+			console.log(vnode);
+			if (!binding.value.color) {
+				el.style.color = 'blue';
+			}else{
+				el.style.color = binding.value.color;
+			}
+			if (!binding.value.fontSize) {
+				el.style.fontSize = '50px';
+			}else{
+				el.style.color = binding.value.fontSize;
+			}
+		});
+		
+		
+		var vm = new Vue({
+			data:{
+				msg:"hello word",
+				time:new Date(),
+				num : 12
+			},
+			components:{
+				'my-header':{
+					template:`<h1 v-fontColor>{{message | Uppercase}}</h1>`,
+					data:function () {
+						return {
+							message:'12'
+						}
+					},
+					directives:{
+						'fontColor':function (el) {
+							el.style.color = 'red';
+						}
+					},
+					filters:{
+						'Uppercase':function (value) {
+							if(!value) return ''
+							return value.toUpperCase();
+						}
+					},
+					mounted:function () {
+						newVm.$on('getMsg',function (str) {
+							this.message = str;
+						}.bind(this))
+						console.log('mounted')
+					},
+					created:function () {
+						console.log('created');
+					},
+					destroyed:function () {
+						console.log('destroyed');
+					}
+				},
+				'my-body':{
+					template:`<ul><li @click='sendMsg' v-for='item in items'>{{item}}</li></ul>`,
+					data:function () {
+						return {
+							items:['a','b','c']
+						}
+					},
+					methods:{
+						sendMsg:function (event) {
+							newVm.$emit('getMsg',event.target.innerHTML);
+						}
+					},
+					filters:{
+						'formatTime':function (val) {
+							if(!val) return ''
+							var time = new Date(val);
+							var Y = time.getFullYear();
+							var M = time.getMonth()+1;
+							var D = time.getDay();
+							return Y+'-'+M+'-'+D;
+						}
+					}
+				}
+			}
+		}).$mount("#app");
+	</script>
+</body>
+</html>

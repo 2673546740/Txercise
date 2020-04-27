@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+		<script src="vue-router.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.active{
+				color: red;
+			}
+			.isactive{
+				color: blue;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<button @click="this.$router.go(-1)">返回</button>
+			<button @click="this.$router.go(1)">前进</button>
+			<button v-on:[max]= "show('soso')">哇</button>
+			<router-link to="/b/lisi/c">b页面</router-link>
+			<router-link to="/a/lisi/c">页面</router-link>
+			<router-link to="/a/wangwu/d">a页面</router-link>
+			<router-link to="/b/wangwu/d">页面</router-link>
+			<router-link :to={path:'d',id:'lisi'}>???</router-link>
+			<div :class={active:active}>{{shuchu1()}}</div>
+			<div v-bind:class={isactive:zhangsan}>{{shuchu2}}</div>
+			
+			<div v-if="active">哇</div>
+			<div v-else>哦</div>
+			
+			<button @dblclick="show('Look')">按钮</button>
+		
+			<button @click="changeType()">按钮2</button>
+			
+			<!--模板中key-->
+			<template v-if="loginType == 'username'">
+			  	<label>Username</label>
+			  	<input placeholder="Enter your username">
+			</template>
+			<template v-else>
+			  	<label>Email</label>
+			  	<input placeholder="Enter your email address">
+			</template>
+			<!--<template v-if="loginType == 'username'">
+			  	<label>Username</label>
+			  	<input placeholder="Enter your username" key="username">
+			</template>
+			<template v-else>
+			  	<label>Email</label>
+			  	<input placeholder="Enter your email address" key="Email">
+			</template>-->
+			
+			<button @click="changeType()">toggle login type</button>
+			
+			<div>
+				<ul v-for="(item,index) in student">
+					<li><span>{{item.name}}</span><span>{{item.age}}</span><span>{{item.sex == 1?'男':'女'}}</span></li>
+				</ul>
+			</div>
+			
+			<div>
+				<ul v-for="(item,key,index) in Class">
+					<li>{{index}}-{{key}}-{{item}}</li>
+				</ul>
+			</div>
+			
+			<router-view></router-view>
+			
+			<form v-on:submit.prevent.keyup.enter="tijiao" method="post">
+				<input type="text" name="username" autocomplete="off" v-model="username" id="username" value="" />
+				<input type="password" name="psw" autocomplete="off" v-model="psw" id="psw" value="" />
+				
+				<input type="checkbox" v-model="check" name="ck1" id="ck1" value="1" />
+				<input type="checkbox" v-model="check" name="ck2" id="ck2" value="2" />
+				<input type="checkbox" v-model="check" name="ck3" id="ck3" value="3" />
+				
+				<input type="submit" value="提交"/>
+			</form>
+			
+			
+			<div @click.ctrl='tijiao()'>123456</div>
+		</div>
+		<script type="text/javascript">
+			
+			const a = {template:
+					`<div>
+						aaa {{$route.params.id}}
+						<router-view></router-view>
+					</div>
+				`};
+			const b = {template:
+					`<div>
+						bbb {{$route.params.id}}
+						<router-view></router-view>
+					</div>
+				`};
+			
+			const c = {template:`<div>我是C页面</div>`};
+			const d = {template:`<div>我是D页面</div>`};
+			
+			const routers = [
+				{path:"/a/:id",component:a,
+					children:[
+						{path:"c",component:c},
+						{path:"d",component:d}]
+				},
+				{path:"/b/:id",component:b,
+					children:[
+						{path:"c",component:c},
+						{path:"d",component:d}]
+				}
+			];
+			
+			const router = new VueRouter({routes:routers});
+			
+			var vm = new Vue({
+				router:router,
+				data:{
+					name:"zhangsan",
+					max : 'click',
+					active:false,
+					zhangsan:true,
+					username:null,
+					psw:null,
+					loginType:'username',
+					student:[
+						{name:'zhangsan',age:10,sex:1},
+						{name:'lisi',age:15,sex:0},
+						{name:'wangwu',age:12,sex:1},
+						{name:'zhaoliu',age:17,sex:0},
+						{name:'qianqi',age:10,sex:1}
+					],
+					Class:{
+						student:40,
+						avgAge:18,
+						grade:80
+					},
+					check:[]
+				},
+				methods:{
+					show:function (res) {
+						console.log(res)
+					},
+					shuchu1:function () {
+						return this.name;
+						console.log(this.name)
+					},
+					changeType:function () {
+						console.log(this.loginType)
+						this.loginType = this.loginType == 'username' ? 'Email':'username';
+					},
+					tijiao:function () {
+						console.log(this.check)
+					}
+				},
+				computed:{
+					shuchu2:function () {
+						console.log(this.name)
+						return this.name;
+					},
+					jisuan:function () {
+						if (this.active) {
+							return this.zhangsan = true;
+						}else{
+							return this.zhangsan = false;
+						}
+					}
+				}
+			}).$mount("#app")
+		</script>
+	</body>
+</html>

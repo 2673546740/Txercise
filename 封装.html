@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="jq_g_extend.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			div{
+				width: 100px;
+				height: 100px;
+				border: 1px solid red;
+				position: absolute;
+			}
+			p{
+				background-color: red;
+				cursor: move;
+				-moz-user-select: none;
+				-webkit-user-select: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="dv">
+			<p>我的DIV</p>
+		</div>
+		<input type="checkbox" name="" id="checkbox" checked value="" />
+	</body>
+</html>
+<script type="text/javascript">
+	$('div').move();
+	console.log($(document).getURLParms('http://www.baidu.com?name=zhangsan&age=12'))
+	console.log($(document).getURLParms())
+	console.log($.getURLParms());
+	console.log($.getURLParms('http://www.baidu.com?name=zhangsan&age=23&sex=1'))
+</script>
+<script type="text/javascript">
+	//对象
+	function People (name,age) {
+		this.name = name;
+		this.age = age;
+	}
+	People.prototype.say = function () {
+		console.log('!');
+	}
+	
+	function Man (name,age) {
+		People.call(this,name,age);
+	}
+	
+	var people = new People('zhangsan',12);
+	people.say()
+	console.log(people)
+	
+	var man = new Man('lisi',22)
+	man.prototype = People.prototype;
+	/*man.prototype.say = function () {
+		console.log('Good morning')
+	}*/
+	console.log(man)
+	man.prototype.say();
+	
+	console.log($('#checkbox')[0].checked)
+	console.log($('#checkbox'))
+	
+	var a = [1,2,3]
+	a.length = 0;
+	console.log(a)
+</script>

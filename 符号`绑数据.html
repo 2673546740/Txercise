@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+	</body>
+	<script type="text/javascript">
+		var arr = [1,2,3,4,5,6];
+		for (let i  = 0 ; i < arr.length ; i++) {
+			$('ul').append(`
+				<li>${arr[i]}</li>
+			`)
+		};
+		var obj = {
+			'name':'zhangsan',
+			'age':'23'
+		}
+		arr.forEach(function (v,i) {
+			console.log(v+','+i)
+		});
+		for (let i in arr) {
+			console.log(arr[i])
+		}
+		$(function () {
+			for (var i in arr) {
+				console.log(arr[i])
+			}
+		})
+		var str = '10';
+		var num = 10;
+		console.log(str == num)
+		console.log(0 == false)
+		
+		
+		
+		$('li').each(function (i,e) {
+			console.log(i+','+$(e).text())
+		})
+		$.each(arr, function(i,v) {
+			console.log(i+','+v)
+		});
+	</script>
+</html>

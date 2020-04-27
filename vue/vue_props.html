@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<span>{{message}}</span>
+			<my-message></my-message>
+		</div>
+		<script type="text/javascript">
+			var vm = new Vue({
+				data:{
+					message:"Hello Word"
+				},
+				components:{
+					"my-message":{
+						template:`<div>{{msg}}<button @click="change">按钮</button><second-component :msgs="msg"></second-component></div>`,
+						data:function () {
+							return {
+								msg:"Hello Vue"
+							}
+						},
+						methods:{
+							change:function(){
+								this.msg = 'Hello Boys'
+							}
+						},
+						components:{
+							"second-component":{
+								template:`<div>{{msgs}}</div>`,
+								props:{
+									msgs:{
+										type:String,
+										default:'Hello'
+									}
+								}
+							}
+						}
+					}
+				}
+			}).$mount("#app")
+		</script>
+	</body>
+</html>

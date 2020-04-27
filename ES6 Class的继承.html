@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			class People{
+				constructor(x, y, z) {
+				    this.x = x;
+				    this.y = y;
+				    this.z = z;
+				}
+				smoke(){
+					console.log('i am smoking!!!')
+				}
+			}
+			
+			class Man extends People{
+				run(){
+					console.log('run')
+				}
+				smoke(){
+					console.log('i am not smoke!!!')
+				}
+			}
+			
+			var man = new Man(1,2,3);
+			man.smoke()
+			
+			console.log(man)
+		</script>
+	</body>
+</html>

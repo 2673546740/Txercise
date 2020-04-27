@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="angular.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div ng-app="myApp" ng-controller="myCtl">
+			<ul>
+				<li ng-repeat="item in data track by $index">{{$index}}+{{item.uNickName}}</li>
+				<li>{{name}}</li>
+			</ul>
+			<user-name></user-name>
+			<user-age></user-age>
+			<div>
+				时间：{{hour}}：{{mins}}：{{seco}}
+			</div>
+			
+			<div>
+				<div ng-repeat="people in peoples | orderBy:['age','name']">
+					<span>{{people.name}}</span>
+				</div>
+				<div>{{12.1 | currency:'$'}}</div>
+				<div>{{12.13 | number:2}}</div>
+				<!--angular内置的九种过滤器https://blog.csdn.net/rainbow8590/article/details/78330644-->
+			</div>
+			
+			<div>
+				<input type="text" ng-model="paixu" />
+				<div ng-repeat="people in lists">
+					<span>{{people.name}}</span>
+				</div>
+			</div>
+
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	angular.module('myApp',['test','age']).controller('myCtl',function ($scope,$http,$interval,$filter) {
+		$scope.name = 'zhangsan';
+		$scope.age = 'zhangsan';
+		$scope.hour = 0;
+		$scope.mins = 0;
+		$scope.seco = 0;
+		
+		
+		$scope.paixu = '';
+		$scope.peoples = [
+			{name:'张',age:23},
+			{name:'王',age:24},
+			{name:'李',age:23},
+			{name:'赵',age:26},
+			{name:'钱',age:21},
+			{name:'孙',age:20},
+			{name:'唐',age:25},
+			{name:'刘',age:23}
+		];
+		
+		
+		$interval(function () {
+			$scope.hour = new Date().getHours()  <10?'0'+new Date().getHours()  :new Date().getHours();
+			$scope.mins = new Date().getMinutes()<10?'0'+new Date().getMinutes():new Date().getMinutes();
+			$scope.seco = new Date().getSeconds()<10?'0'+new Date().getSeconds():new Date().getSeconds();
+		},1000)
+		
+		/*$http.post('http://www.ai-emma.com:8081/user/getusers?pageIndex=1&pageSize=10').then(function (data) {
+			$scope.data = data.data.list.message;
+			console.log($scope)
+		})*/
+		$scope.people = [];
+		$scope.timer = $interval(function () {
+			$scope.people.push('张三');
+			/*if ($scope.people.length>=5) {
+				$interval.cancel($scope.timer)
+			}*/
+		},2000,3)
+		/*$scope.timer = $interval(function () {
+			$scope.people.push('张三');
+			if ($scope.people.length>=5) {
+				$interval.cancel($scope.timer)
+			}
+			//每两秒钟执行一次，共执行五次
+		},2000,5)*/
+		$scope.timer.then(function () {
+			console.log($scope.people)
+		})
+		
+		
+		$scope.data = [
+            {name:'张',age:23},
+			{name:'王',age:24},
+			{name:'李',age:23},
+			{name:'赵',age:26},
+			{name:'钱',age:21},
+			{name:'孙',age:20},
+			{name:'唐',age:25},
+			{name:'刘',age:23}
+        ];
+        $scope.lists = $scope.peoples;
+        $scope.$watch('paixu',function(newValue,oldValue){
+            console.log(newValue)
+            console.log(oldValue)
+            $scope.lists = $filter('filter')($scope.peoples,newValue);
+        });
+
+	})
+	angular.module('test',[]).directive("userName", function () {
+        return {
+        	restrict: 'E',
+            socpe: {
+                name:'@'
+            },
+            template: '<span>{{name}}</span>',
+            replace:true
+        }
+	});
+	angular.module("age",[]).directive("userAge",function () {
+		return {
+			restrict:"E",
+			socpe:{
+				age:'@'
+			},
+			template:'<span>{{age}}</span>',
+			replace:true
+		}
+	})
+	/*$.post('http://www.ai-emma.com:8081/user/getusers?pageIndex=1&pageSize=10',function (data) {
+		console.log(data)
+		var data = data.list.message;
+		$.each(data, function(i,v) {
+			$('ul').append(`
+				<li>${v.uNickName}</li>	
+			`)
+		});
+		
+	}).then(function () {
+		console.log('请求完成')
+	}).fail(function () {
+		console.log('请求失败')
+	})*/
+	/*$.ajax({
+		type:"post",
+		url:"http://www.ai-emma.com:8081/user/getusers",
+		async:false,
+		data:{'pageIndex':'1','pageSize':'10'},
+		success:function (data) {
+			console.log(data)
+		},
+		error:function (data) {
+			console.log(data)
+		}
+	});*/
+	/*$.post('http://www.ai-emma.com:8081/user/getusers',{'pageIndex':'1','pageSize':'10'}).then(function (data) {
+		var data = data.list.message;
+		$.each(data, function(i,v) {
+			$('ul').append(`
+				<li>${v.uNickName}</li>	
+			`)
+		});
+	}).fail(function (data) {
+		console.log(data)
+	})*/
+	/*$.post('http://www.ai-emma.com:8081/user/getusers',{search:{'pageIndex':'1','pageSize':'10'}},function (data) {
+		console.log(data)
+	})*/
+	//console.log(a)//undefined
+	
+	//console.log(b) //报错
+	//var a = 10;
+	//let b = 10;
+	/*const a = 20;
+	a = 30;
+	console.log(a)*/ //报错
+</script>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body,html{
+				width: 100%;
+				height: 100%;
+				background-color: #000000;
+			}
+			#test{
+				/*margin: 0px calc((100% - 600px)/2);*/
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="test" width="600" height="600"></canvas>
+		<script type="text/javascript">
+
+			var canvas = document.getElementById('test');
+			var ctx = canvas.getContext('2d');
+			ctx.fillStyle = '#32D373';
+			/*ctx.beginPath();
+			ctx.moveTo(100,100);
+			ctx.lineTo(300,100);
+			ctx.lineTo(130,200);
+			ctx.lineTo(200,20);
+			ctx.lineTo(260,200);
+			ctx.lineTo(100,100);
+			ctx.fill();*/
+			
+			//ctx.strokeRect(200,200,120,120)
+			
+			//ctx.beginPath();
+			//ctx.moveTo(100,100);
+			//ctx.lineTo(100,150);
+			//ctx.lineTo(150,150);
+			//ctx.fill();
+			//ctx.stroke();
+			
+			//ctx.arc(200,200,50,0,Math.PI/2,false);
+			//ctx.stroke();
+			
+			//ctx.bezierCurveTo(50,50,100,200,200,240);
+			//ctx.stroke();
+			
+			
+			
+			/*$(window).resize(function () {
+				$('#test').attr('width',$('body').width()*0.99);
+				$('#test').attr('height',$('body').height()*0.99);
+			})
+			$('#test').attr('width',$('body').width()*0.99);
+			$('#test').attr('height',$('body').height()*0.99);
+			
+			var canvas = document.getElementById('test');
+			var ctx = canvas.getContext('2d');
+			ctx.fillStyle = '#FFFFFF';
+			
+			var speed = 2;
+			var x = 10;
+			
+			
+			draw();
+			function draw() {
+				ctx.clearRect(0, 0, $('body').width()*0.99, $('body').height()*0.99);
+				
+				ctx.fillRect(x,0,50,50);
+				ctx.fill();
+				
+				
+				x += speed;
+				if(x>$('body').width()*0.99 - 10||x<10){
+			        speed = -speed;
+			    }
+			    //被优化过的动画执行方向1.递归调用；2.可以自适应浏览器的刷新的帧率
+			    window.requestAnimationFrame(draw);
+			}*/
+			
+			var x = 1;
+			setInterval(function () {
+				draw();
+				setTimeout(function () {
+					ctx.clearRect(0,0,$('body').width()*0.99,$('body').width()*0.99);
+				},1000)
+			},2000)
+			
+			function draw() {
+				
+				var scale = Math.random()*0.1;
+				for (var i = 0; i < 5; i++) {
+					for (var j = 0; j < 5; j++) {
+						ctx.save();
+						ctx.fillStyle = 'rgb(255,255,225)';
+						ctx.translate(Math.random()*$('body').width()*0.99,Math.random()*$('body').width()*0.99);
+						ctx.scale(scale,scale);
+						ctx.beginPath();
+						ctx.moveTo(100+x,100+x);
+						ctx.lineTo(300+x,100+x);
+						ctx.lineTo(130+x,200+x);
+						ctx.lineTo(200+x,20+x);
+						ctx.lineTo(260+x,200+x);
+						ctx.lineTo(100+x,100+x);
+						ctx.fill();
+						ctx.restore();
+					}
+				}
+			}
+			
+			
+			/*var x = 20;
+			var speed = 4;
+			//电脑的帧率是1秒钟60Hz， 就相当于一秒钟可以播放60张图片，就相当于播放一张图片使用16.7ms
+			
+			function draw () {
+			    //1. 先把画布清空
+			    ctx.clearRect(0, 0, $('body').width()*0.99, $('body').height()*0.99);
+			    //2. 画小球
+			    ctx.beginPath();
+			    var gradient = ctx.createRadialGradient(x-10,190,0,x,200,20);
+			    gradient.addColorStop(0,'#fff');
+			    gradient.addColorStop(1,'#333');
+			    ctx.fillStyle = gradient;
+			    ctx.arc(x, 200, 20, 0, 2*Math.PI);
+			    ctx.fill();
+			    //3. x要移动
+			    x += speed;
+			    if(x>$('body').width()*0.99 - 20||x<20){
+			        speed = -speed;
+			    }
+			    //被优化过的动画执行方向1.递归调用；2.可以自适应浏览器的刷新的帧率
+			    window.requestAnimationFrame(draw);
+			}
+			draw();*/
+		</script>
+	</body>
+</html>

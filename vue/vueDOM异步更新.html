@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{msg}}
+			<div v-show="show">发生了改变</div>
+			<button @click="change">更改</button>
+			<button @click="sums">求和</button>
+		</div>
+		<script type="text/javascript">
+			var vm = new Vue({
+				data:{
+					msg:'hello',
+					show:false,
+					sum:0
+				},
+				methods:{
+					change(){
+						this.msg = 'bye';
+						vm.$nextTick(function () {
+							this.show = true;
+						})
+					},
+					sums(){
+						console.log(this.sum)
+					}
+				}
+			}).$mount('#app');
+			
+		</script>
+	</body>
+</html>

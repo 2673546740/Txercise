@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div id="app" ref='myApp'>
+		<div>{{count}}</div>
+		<my-header :num='count'></my-header>
+		<my-body :num='count'></my-body>
+	</div>
+	<script type="text/javascript">
+		//用空实例的方法进行兄弟组件之间的通信
+		var newVm = new Vue();
+
+		var vm = new Vue({
+			data:{
+				count:0
+			},
+			mounted:function () {
+				newVm.$on('getnum',function (num) {
+					this.count = num;
+					//console.log(this.$refs);
+				}.bind(this))
+			},
+			components:{
+				'my-header':{
+					template:`<button @click='add'>+</button>`,
+					props:['num'],
+					data:function(){
+						return {
+							msg:'hello'
+						}
+					},
+					methods:{
+						add:function () {
+							newVm.$emit('getnum',this.num+1)
+							//console.log(this)
+						}
+					}
+				},
+				'my-body':{
+					template:`<button @click='reducenum'>-</button>`,
+					props:['num'],
+					methods:{
+						reducenum:function () {
+							newVm.$emit('getnum',this.num-1)
+						}
+					}
+				}
+			}
+		}).$mount("#app");
+	</script>
+</body>
+</html>

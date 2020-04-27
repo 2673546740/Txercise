@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div id="app">
+		<button @click="changeTitle(1)">组件1</button>
+		<button @click="changeTitle(2)">组件2</button>
+		<button @click="changeTitle(3)">组件3</button>
+		<keep-alive>
+			<component :is='nowTitle'></component>
+		</keep-alive>
+		
+		<template v-if="show">
+			<label for="">username</label> <input type="text" key='username' />
+		</template>
+		<template v-else>
+			<label for="">Email</label> <input type="text" key='Email' />
+		</template><br/>
+		<button @click="show=!show">按钮</button>
+	</div>
+	<script type="text/javascript">
+		
+		var vm = new Vue({
+			data:{
+				nowTitle:'my-title-1',
+				show:true
+			},
+			components:{
+				'my-title-1':{
+					template:`<div>标题一<input type="text" /></div>`
+				},
+				'my-title-2':{
+					template:`<div>标题二<input type="text" /></div>`
+				},
+				'my-title-3':{
+					template:`<div>标题三<input type="text" /></div>`
+				}
+			},
+			methods:{
+				changeTitle:function (index) {
+					this.nowTitle = 'my-title-'+index;
+				}
+			}
+		}).$mount("#app");
+		
+	</script>
+</body>
+</html>

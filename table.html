@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>table</title>
+		<script src="jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			table{
+				width: 500px;
+				height: 300px;
+				margin: 50px auto;
+				/*合并边框，默认是不合并separate*/
+				border-collapse: collapse;
+				border: double #32D373;
+				/*border-collapse: separate;
+				border-spacing: 2px;*/
+				caption-side: bottom;
+			}
+			td{
+				text-align: center;
+			}
+			div{
+				position: absolute;
+				top: 200px;
+				left: 200px;
+				width: 500px;
+				height: 500px;
+				border: 1px solid red;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<table border="1" cellspacing="0" cellpadding="0">
+			<caption><h3>标题</h3></caption>
+			<tr>
+				<th>Header</th>
+				<th>Header</th>
+				<th>Header</th>
+				<th>Header</th>
+			</tr>
+			<tr>
+				<td>Data</td>
+				<td>Data</td>
+				<td>Data</td>
+				<td>Data</td>
+			</tr>
+		</table>
+		<button>按钮</button>
+		<input type="hidden" name="" id="" value="" />
+		<input type="text" name="" id="" value="" />
+		<script type="text/javascript">
+			$('button').on('click',function () {
+				var iTop = (window.innerHeight-30-600)/2;
+  				var iLeft = (window.innerWidth-10-600)/2;
+				window.open("http://www.baidu.com","a","width=600,height=600,top="+iTop+",left="+iLeft+"")
+			})
+			
+			
+			console.log(document.getElementsByTagName("input:hidden"))
+		</script>
+	</body>
+</html>

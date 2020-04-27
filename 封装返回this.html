@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			div{
+				float: left;
+			}
+			.div1{
+				width: 100px;
+				height: 100px;
+			}
+			.div2{
+				width: 200px;
+				height: 200px;
+			}
+			.div3{
+				width: 300px;
+				height: 300px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="div1"></div>
+		<div class="div2"></div>
+		<span>1</span>
+		<div class="div3">
+			<span class="div1">2</span>
+		</div>
+		<p style="clear: both;"></p>
+		<input type="checkbox" name="" id="" value="1" />
+		<input type="checkbox" name="" id="" value="2" />
+		<input type="checkbox" name="" id="" value="3" />
+		<input type="checkbox" name="" id="" value="4" />
+		<input type="checkbox" name="" id="" value="5" />
+	</body>
+	<script type="text/javascript">
+		(function ($) {
+			$.fn.mythod = function (a) {
+				return this.each(function () {
+					if (a > $(this).height()) {
+						$(this).css('background-color','red');
+					}
+					if ($(this).height() > 200) {
+						$(this).css('border','1px solid red')
+					}
+				})
+			}
+		})(jQuery)
+		$(function () {
+			var str = 'never say give up !!!';
+			console.log(str);
+		})
+		console.log(str)
+		var str = 'say good bey'
+		$('div').mythod(150);
+		
+		var arr = ['1','3'];
+		$('input').map(function () {
+			if (arr.indexOf($(this).val())!= -1) {
+				$(this).attr('checked','checked')
+			}
+		})
+		
+		var str1 = 'background';
+		var newStr = str1.split('');
+		var newArr = [];
+		$.each(newStr, function(index,value) {
+			if (index%2 == 0) {
+				value = value+index;
+				newArr.push(value)
+			}
+		});
+		var newObj = {
+			name : 'zhansan'
+		}
+		
+		console.log(Array.prototype.isPrototypeOf(newArr))
+		console.log(Array.prototype.isPrototypeOf(newObj))
+		
+		
+		console.log($('span').index())
+		
+		$(window).resize(function () {
+			
+		})
+		
+	</script>
+</html>

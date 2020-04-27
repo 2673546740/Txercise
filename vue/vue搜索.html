@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<input type="text" v-model="keyWord"/>
+			<ul>
+				<li v-for="item in search(keyWord)">{{item.name}} | {{item.address}}</li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			var vm = new Vue({
+				data:{
+					data: [
+						{name:'张三',address:'河南'},
+						{name:'李四',address:'北京'},
+						{name:'王五',address:'上海'},
+						{name:'赵六',address:'杭州'}
+					],
+					keyWord:''
+				},
+				methods:{
+					search(keyWord){
+						var newList = [];
+						this.data.forEach((item,index)=>{
+							if (item.address.indexOf(keyWord) != -1 || item.name.indexOf(keyWord) != -1) {
+								newList.push(item)
+							}
+						})
+						return newList
+					}
+				}
+			}).$mount('#app')
+		</script>
+	</body>
+</html>

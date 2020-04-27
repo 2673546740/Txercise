@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<video width="800" src="a.mp4" height="">
+			<!--<source src="a.mp4" type="video/mp4"></source>-->
+		</video>
+		<input type="text" name="" id="phone" value="" />
+		<button onclick="testPhone($('#phone').val())">测试</button>
+	</body>
+</html>
+<script type="text/javascript">
+	var money = '123.23';
+	var newmoney = '12323';
+	var str = /\./g;
+	var newstr = /\d{2}$/;
+	console.log(str.test(money))
+	console.log(money.replace(str,''))
+	console.log(newstr.test(newmoney))
+	console.log(newmoney.replace(newstr,'.'+newmoney.match(newstr)))
+	
+	console.log(parseFloat(money))
+	
+	console.log(money.match(/\d{1}/g))
+	
+	
+	function  testPhone (str) {
+		var rex = /^1+[3,5,7,8]+[0-9]{9}$/;
+		console.log(rex.test(str))
+	}
+	//https://www.cnblogs.com/onepixel/p/5218904.html
+</script>

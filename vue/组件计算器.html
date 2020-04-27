@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{msg}}
+			<computer-vue></computer-vue>
+			<computer-vue></computer-vue>
+			<computer-vue></computer-vue>
+			<computer-vue></computer-vue>
+		</div>
+		<script type="text/javascript">
+			
+			Vue.component('computerVue',{
+				data(){
+					return {
+						a:0,
+						b:0,
+						sum:0
+					}
+				},
+				template:`<div><input type="number" v-model='a'/> + <input type="number" v-model='b'/> = {{sum}} </div>`,
+				methods:{
+					comput:function () {
+						this.sum = this.a*1 + this.b*1;
+					}
+				},
+				watch:{
+					'a':'comput',
+					'b':'comput'
+				}
+			});
+			
+			new Vue({
+				data:{
+					msg:'132'
+				},
+				mounted:function () {
+					console.log(123)
+				}
+			}).$mount('#app')
+			
+		</script>
+	</body>
+</html>

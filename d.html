@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="jq_g_extend.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+		<input type="text" name="" id="" value="" />
+	<body>
+		<button>一次性按钮</button>
+	</body>
+	<script type="text/javascript">
+				
+		$('button').one('click',function () {
+			alert('??')
+		})
+		var money = 12.1;
+		console.log(money.toFixed(2).toString().replace('.',''));
+		/*console.log($.formatterMoney(money))
+		$(document).on("keyup",function (e) {
+			if (e.ctrlKey==true&&e.keyCode==13) {
+				console.log(111)
+			}
+		})*/
+		
+		/*var ajax = new XMLHttpRequest();
+		ajax.open('post',url,false);
+		ajax.send();
+		ajax.onreadystatechange = function  (res) {
+			console.log(res)
+		}*/	
+			
+		//闭包
+		function outFn(){
+			var a = 1;
+			function innerFn(){
+				console.log(a)
+			}
+			a+=1;
+			return innerFn()
+		}
+		outFn()
+	</script>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+	<script src="vuex.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div id="app" ref='myApp'>
+		{{sum}}
+		<my-header></my-header>
+		<my-body></my-body>
+		
+		<button @click="Add">增加</button>
+		<button @click="Reduce">减少</button>
+		<button @click="Length">长度</button>
+	</div>
+	<script type="text/javascript">
+		
+		var store = new Vuex.Store({
+			state:{
+				count:0,
+				msg:'helloWorld Vuex'
+			},
+			getters:{
+				CountLength(state,getters){
+					console.log(state)
+					console.log(getters)
+					return state.msg.length
+				}
+			},
+			mutations:{
+				zengjia:function (state) {
+					state.count++;
+				},
+				jianshao:function (state) {
+					state.count--;
+				}
+			},
+			actions:{
+				Add(ctx) {
+					setTimeout(function () {
+						ctx.commit('zengjia')
+					},1000)
+				},
+				Reduce(ctx){
+					setTimeout(function () {
+						ctx.commit('jianshao')
+					},1000)
+				}
+			}
+		});
+
+		var vm = new Vue({
+			store,
+			computed:{
+				sum:function () {
+					return store.state.count;
+				}
+			},
+			components:{
+				'my-header':{
+					template:`<button @click='add'>+</button>`,
+					methods:{
+						add:function () {
+							store.commit('zengjia')
+						}
+					}
+				},
+				'my-body':{
+					template:`<button @click='reduce'>-</button>`,
+					methods:{
+						reduce:function () {
+							store.commit('jianshao')
+						}
+					}
+				}
+			},
+			methods:{
+				Add() {
+					store.dispatch('Add')
+				},
+				Reduce(){
+					store.dispatch('Reduce')
+				},
+			    Length(){
+			    	console.log(this.$store.getters.CountLength)
+			    }
+			}
+		}).$mount("#app");
+	</script>
+</body>
+</html>
