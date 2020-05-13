@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{a}}
+			{{b}}
+			<ul>
+				<li v-for="item in c">{{item}}</li>
+			</ul>
+			<button @click="add()">+</button>
+		</div>
+		<script type="text/javascript">
+			var vm = new Vue({
+				data() {
+					return {
+						a: 1,
+						b: 2,
+						c:[1,2,3]
+					}
+				},
+				methods:{
+					add:function (){
+						this.b += 4;
+						console.log(this.b)
+						this.$nextTick(()=>{
+							console.log(this.b)
+						})
+					}
+				}
+			}).$mount('#app')
+			
+			vm.c[0] = 2
+			
+			vm.$set(vm.c,0,3)
+			
+			vm.c.splice(2)
+
+		</script>
+	</body>
+</html>

@@ -5,6 +5,12 @@
 		<title></title>
 		<link href="index.less" rel="stylesheet/less" type="text/css"/>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script>
+		<style type="text/css">
+			span::selection{
+				color: #029ae5;
+				background-color: white;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="container">
@@ -33,6 +39,24 @@
 			var url = 'http://www.baidu.com?name=张三&age=12';
 			console.log(decodeURI(url));
 			console.log(encodeURI(url));
+			
+			var arr1 = [1,2,3,4];
+			var arr2 = [1,2,3,5];
+			console.log(arr2)
+			console.log(Object.assign([],arr2))
+			console.log(Object.assign([],arr2) == arr2)
+			
+			var obj1 = {
+				name:'zhang',
+				slot:{sex:'man',age:23},
+				address:'zz'
+			};
+			var obj2 = {
+				name:'li',
+				slot:{sex:'women',age:20}
+			}
+			
+			console.log(Object.assign(obj1,obj2))
 		</script>
 	</body>
 </html>

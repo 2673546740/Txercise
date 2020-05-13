@@ -12,8 +12,14 @@
 				<button slot='left' @click="left">左按钮</button>
 				<button slot='right'>右按钮</button>
 			</my-header>
+			<my-content><span slot="mySlot">我是新的内容</span></my-content>
 		</div>
 		<script type="text/javascript">
+			
+			Vue.component('my-content',{
+				template:`<div>我是内容组件<slot name='mySlot'></slot></div>`
+			})
+			
 			var vm = new Vue({
 				el:"#app",
 				data: {

@@ -6,31 +6,47 @@
 	</head>
 	<body>
 		<script type="text/javascript">
-			var arr = [1,2,3,[4,5,6,7,8,9,[10,11,12,[13,14,15,[16,17,18,19]]]]];
-			
-			var shuchu = function(arr){
-				for(let i in arr){
-					if(typeof arr[i] != 'object'){
+			var arr = [1, 2, 3, [4, [5, 6, 7], 8, 9, [10, 11, 12, [13, 14, 15, [16, 17, 18, 19]]]]];
+			var shuchu = function(arr) {
+				for (let i in arr) {
+					if (typeof arr[i] != 'object') {
 						console.log(arr[i])
-					}else{
+					} else {
 						shuchu(arr[i])
 					}
 				}
 			}
+			//shuchu(arr)
+
+			var obj1 = {
+				name: 'zhang',
+				slot: {
+					sex: 'man',
+					age: 23
+				}
+			}
 			
-			var shuchu2 = function(arr){
-				var tempArr=arr;
-				for (var i=0;i<tempArr.length;i++) {
-					if(typeof tempArr[i] != 'object'){
-						console.log(tempArr[i])
-					}else{
-						tempArr=tempArr[i]
-						i=-1;
+			var obj2 = {
+				address:'hn',
+				slot:{
+					sex:'women',
+					age:23
+				}
+			}
+			
+
+			var copy = function(obj) {
+				for (let key in obj) {
+					if (typeof obj[key] != 'object') {
+						console.log(key + '-' + obj[key])
+					} else {
+						copy(obj[key])
 					}
 				}
 			}
-			//shuchu(arr)
-			shuchu2(arr)
+			// copy(obj1)
+			
+			
 		</script>
 	</body>
 </html>

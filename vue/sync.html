@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div id="app">
+		<button @click="changeTitle">修改title</button>
+		<my-title :titles.sync='title'></my-title>
+	</div>
+	<script type="text/javascript">
+		var vm = new Vue({
+			data(){
+				return {
+					title:'标题'
+				}
+			},
+			methods:{
+				changeTitle(){
+					this.title = 'new Title'
+				}
+			},
+			components:{
+				'myTitle':{
+					template:`<div @click='changeTitle'>{{titles}}</div>`,
+					props:{
+						titles:{
+							type:String,
+							default:''
+						}
+					},
+					methods:{
+						changeTitle(){
+							this.$emit('update:titles','新标题')
+						}
+					}
+					
+				}
+			}
+		}).$mount('#app')
+		
+		vm.$nextTick(()=>{
+			console.log('更新')
+		})
+	</script>
+</body>
+</html>

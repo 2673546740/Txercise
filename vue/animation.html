@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>	
+	</head>
+	<style type="text/css">
+		.flip-list-move {
+		  transition: transform 1s;
+		}
+	</style>
+	<body>
+		<div id="app" class="demo">
+		  <button v-on:click="shuffle">Shuffle</button>
+		  <transition-group name="flip-list">
+			<li v-for="item in items" v-bind:key="item">
+			  {{ item }}
+			</li>
+		  </transition-group>
+		</div>
+		<script type="text/javascript">
+			new Vue({
+			  el: '#app',
+			  data: {
+			    items: [1,2,3,4,5,6,7,8,9]
+			  },
+			  methods: {
+			    shuffle: function () {
+					console.log(_.shuffle)
+					this.items = _.shuffle(this.items)
+			    }
+			  }
+			})
+		</script>
+	</body>
+</html>

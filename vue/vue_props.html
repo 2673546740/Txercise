@@ -4,23 +4,52 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+		<style type="text/css">
+			.myselfClass{
+				color: red;
+			}
+		</style>
 	</head>
 	<body>
 		<div id="app">
 			<span>{{message}}</span>
-			<my-message></my-message>
+			<my-message class='myselfClass'>
+			</my-message>
+			<button slot='button' @click="submit">插槽按钮</button>
 		</div>
 		<script type="text/javascript">
 			var vm = new Vue({
 				data:{
 					message:"Hello Word"
 				},
+				methods:{
+					submit(){
+						console.log('触发插槽按钮事件')
+					}
+				},
 				components:{
 					"my-message":{
-						template:`<div>{{msg}}<button @click="change">按钮</button><second-component :msgs="msg"></second-component></div>`,
+						template:`<div>{{msg}}<button @click="change">按钮</button><second-component :msgs.sync='msg' :menuList='menuList' ></second-component></div>`,
 						data:function () {
 							return {
-								msg:"Hello Vue"
+								msg:"Hello Vue",
+								menuList:[
+									{
+										name:'橘子',
+										color:'绿色',
+										size:'中等'
+									},
+									{
+										name:'香蕉',
+										color:'黄色',
+										size:'中等'
+									},
+									{
+										name:'苹果',
+										color:'红色',
+										size:'中等'
+									}
+								]
 							}
 						},
 						methods:{
@@ -30,11 +59,34 @@
 						},
 						components:{
 							"second-component":{
-								template:`<div>{{msgs}}</div>`,
+								inheritAttrs:false,
+								template:`
+									<div>
+										{{myselfMsgs}} 
+										<button @click='change()'>触发父组件修改msg</button>
+										<ul>
+											<li v-for='(item,key) in menuList'>{{key+1}}--{{item.name}}--{{item.color}}--{{item.size}}</li>
+										</ul>
+										<slot name='button'></slot>
+									</div>`,
 								props:{
 									msgs:{
 										type:String,
 										default:'Hello'
+									},
+									menuList:{
+										type:Array,
+										default:[]
+									}
+								},
+								methods:{
+									change(){
+										this.$emit('update:msgs','子组件要修改的值')
+									}
+								},
+								computed:{
+									myselfMsgs(){
+										return this.msgs.toUpperCase();
 									}
 								}
 							}

@@ -22,7 +22,7 @@
 				methods:{
 					change(){
 						this.msg = 'bye';
-						vm.$nextTick(function () {
+						this.$nextTick(function () {
 							this.show = true;
 						})
 					},
