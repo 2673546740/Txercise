@@ -31,7 +31,13 @@
 			},
 			components:{
 				'my-title-1':{
-					template:`<div>标题一<input type="text" /></div>`
+					template:`<div>标题一<input type="text" /></div>`,
+					activated(){
+						console.log('我被激活')
+					},
+					deactivated() {
+						console.log('失活')
+					}
 				},
 				'my-title-2':{
 					template:`<div>标题二<input type="text" /></div>`

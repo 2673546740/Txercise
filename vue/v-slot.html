@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{msg}}
+			{{people}}
+			<base-layout>
+				<template #header="myHeader">
+					<h1>{{myHeader.title}}</h1>
+				</template>
+
+				<template #default='myHeader'>
+					<p>{{myHeader.content}}</p>
+				</template>
+
+				<template #footer='myFooter'>
+					<!-- 此处看传过来的数据内容 -->
+					<p>{{myFooter}}</p>
+				</template>
+				
+				<div slot='special'>
+					我是特别的插槽
+				</div>
+			</base-layout>
+		</div>
+		<script type="text/javascript">
+			new Vue({
+				data() {
+					return {
+						msg: '123',
+						people:{
+							sex:'man',
+							height:1.75
+						}
+					}
+				},
+				components: {
+					'base-layout': {
+						template: `<div>
+										<slot name='header' :title='title'></slot>
+										我是组件</br>
+										<slot :content='content'></slot>
+										<slot name='footer' :myFooter='footer'></slot>
+										<slot name='special'></slot>
+								   </div>`,
+								   data(){
+									   return {
+										   title:'标题',
+										   content:'内容',
+										   footer:{
+											   name:'张三',
+											   sex:'man'
+										   }
+									   }
+								   }
+					}
+				}
+			}).$mount('#app')
+		</script>
+	</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="vuex.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.div{
+				transform:scale(1)
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<button type="button" @click="changeMsg()">按钮</button>
+			<button ref='button' type="button" @click="add()">add</button>
+			<button type="button">getLength {{getLength}}</button>
+			<my-body>
+				<span slot='mySlot'>组件中插入一个插槽</span>
+			</my-body>
+			<div>
+				<button type="button" @click="changeNewAry()">修改item值，但是不更新至DOM</button>
+				<ul>
+					<li v-for="item in newAry" ref='li'>{{item}}</li>
+				</ul>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var myMixin = {
+				data(){
+					return {
+						msg1:'123',
+						msg2:'456'
+					}
+				},
+				created(){
+					console.log(1)
+				},
+				methods: {
+					hello: function() {
+						console.log('hello from mixin!')
+					},
+					changeMsg(){
+						console.log(this.$data)
+					}
+				}
+			}
+			
+			var store = new Vuex.Store({
+				state:{
+					msg:'zhangsan',
+					num1:0,
+					num2:0,
+					sum :0
+				},
+				mutations:{
+					add(state){
+						state.num1 +=1;
+						console.log(state.num1)
+					}
+				},
+				getters:{
+					strLength(state){
+						return state.msg.length
+					}
+				},
+				actions:{
+					Add(context){
+						context.commit('add')
+					}
+				}
+			})
+			
+			Vue.config.silent = false;
+			
+			var vm = new Vue({
+				store,
+				mixins:[myMixin],
+				data(){
+					return{
+						msg3:'789',
+						strLength:0,
+						newAry:[1,2,3],
+						newObj:{
+							name:'zhangsan',
+							age:12,
+							sex:'man',
+							address:{
+								city:'ZZ',
+								provice:'HN'
+							}
+						}
+					}
+				},
+				beforeCreate(){
+					console.log(this)
+				},
+				created() {
+					// console.log(this)
+				},
+				mounted(){
+					this.newObj.address.city = 'LY'
+					console.log(this.$refs)
+				},
+				watch:{
+					newObj:{
+						deep:true,
+						handler(newVal,oldVal){
+							console.log(JSON.stringify(newVal)+'-'+JSON.stringify(oldVal))
+						}
+					}
+				},
+				methods:{
+					add(){
+						//this.$store.commit('add')
+						this.$store.dispatch('Add')
+					},
+					changeNewAry(){
+						this.newAry[0] = 4;
+						this.$nextTick(()=>{
+							this.$forceUpdate()
+						})
+						console.log(this.newAry)
+					}
+				},
+				computed:{
+					getLength(){
+						return this.$store.getters.strLength
+					}
+				},
+				components:{
+					'myBody':{
+						template:`<div>
+									组件
+									<slot name='mySlot'></slot>
+									<button @click="change()">按钮</button>	
+								  </div>`,
+						data(){
+							return {
+								msg4:'10'
+							}
+						},
+						mixins:[myMixin],
+						created(){
+							console.log(this)
+						},
+						methods:{
+							change(){
+								this.msg2 = 'new Msg'
+								this.$nextTick(()=>{
+									console.log(this.$data)
+								})
+							}
+						}
+					}
+				}
+			}).$mount('#app')
+						
+		</script>
+	</body>
+</html>
