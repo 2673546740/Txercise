@@ -7,24 +7,32 @@
 	</head>
 	<body>
 		<div id="app">
-			{{msg}}
+			<div ref='myDiv'>{{msg}}</div>
 			<div v-show="show">发生了改变</div>
 			<button @click="change">更改</button>
 			<button @click="sums">求和</button>
+			<ul>
+				<li v-for="item in arr">{{item}}</li>
+			</ul>
 		</div>
 		<script type="text/javascript">
 			var vm = new Vue({
 				data:{
 					msg:'hello',
 					show:false,
-					sum:0
+					sum:0,
+					arr:[1,2,3]
 				},
 				methods:{
-					change(){
-						this.msg = 'bye';
-						this.$nextTick(function () {
-							this.show = true;
+					async change(){
+						//this.msg = 'bye';
+						this.arr[1] = 4
+						console.log(this.arr)
+						await this.$nextTick().then((res)=>{
+							this.$forceUpdate()
+							//console.log(this.$refs.myDiv.innerText)
 						})
+						
 					},
 					sums(){
 						console.log(this.sum)

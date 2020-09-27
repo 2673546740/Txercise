@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function max(a,b,callback){
+				if(a > b){
+					callback(a)
+				}else{
+					console.log(b)
+				}
+			}
+			
+			function consoleLog(x){
+				console.log(x)
+			}
+			max(3,2,consoleLog)
+		</script>
+	</body>
+</html>

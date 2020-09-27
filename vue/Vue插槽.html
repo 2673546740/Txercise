@@ -8,26 +8,28 @@
 	<body>
 		<div id="app">
 			{{msg}}
-			<my-header>
-				<button slot='left' @click="left">左按钮</button>
+			<my-header :msg='msg'>
+				<button slot='left' @click="left" >{{msg}}</button>
 				<button slot='right'>右按钮</button>
 			</my-header>
 			<my-content><span slot="mySlot">我是新的内容</span></my-content>
 		</div>
 		<script type="text/javascript">
-			
-			Vue.component('my-content',{
-				template:`<div>我是内容组件<slot name='mySlot'></slot></div>`
+			Vue.component('my-content', {
+				template: `<div>我是内容组件<slot name='mySlot'></slot></div>`
 			})
-			
 			var vm = new Vue({
-				el:"#app",
+				el: "#app",
 				data: {
 					msg: 'hello'
 				},
 				components: {
 					'my-header': {
-						template: `<div><slot name='left'></slot><span @click='right'>大标题</span><slot name='right'></slot></div>`,
+						template: `<div><slot name='left'>后备内容</slot><span @click='right'>{{msg}}</span><slot name='right' :msg='msg'></slot></div>`,
+						props:['msg'],
+						mounted() {
+							console.log(this.$parent.msg)
+						},
 						methods: {
 							right: function() {
 								console.log(this)
@@ -40,15 +42,6 @@
 						console.log(this)
 					}
 				},
-			})
-			//.$mount('#app')
-
-			vm.msg = "new msg";
-
-			console.log(vm.$el.textContent.trim() === "new msg");
-
-			vm.$nextTick(function() {
-				console.log(vm.$el.textContent.trim() === "new msg")
 			})
 		</script>
 	</body>

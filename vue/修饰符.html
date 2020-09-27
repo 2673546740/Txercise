@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.div{
+				width: 100px;
+				height: 50px;
+				border: 1px solid red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="div" @click="shuchu($event)">
+				<button @click.stop="shuchu($event)">按钮</button>
+			</div>
+			<ul>
+				<li v-for="option in options">
+					<input type="checkbox" :id=option.name :value=option.name v-model="selected" @change="console" /><label :for=option.name>{{option.name}}</label>
+				</li>
+			</ul>
+			
+			<select v-model="singleSelect" @change="consoles">
+				<option disabled value="">请选择</option>
+				<option v-for="option in options" :value = option.name>{{option.name}}</option>
+			</select>
+			
+			<div @click="changeFontSize($event)">我是测试字体大小</div>
+		</div>
+		<script type="text/javascript">
+			new Vue({
+				data(){
+					return {
+						options:[
+							{name:'zhangsan'},
+							{name:'lisi'},
+							{name:'wangwu'}
+						],
+						selected:[],
+						singleSelect:''
+					}
+				},
+				methods:{
+					shuchu(event){
+						console.log(event.target)
+					},
+					console(){
+						console.log(this.selected)
+					},
+					consoles(){
+						console.log(this.singleSelect)
+					},
+					changeFontSize(event){
+						var initFontSize = parseInt(event.target.style.fontSize) ? parseInt(event.target.style.fontSize) : 10;
+						event.target.style.fontSize = initFontSize + 10 +'px'
+					}
+				}
+			}).$mount('#app')
+		</script>
+	</body>
+</html>

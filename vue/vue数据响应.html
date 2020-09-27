@@ -10,7 +10,10 @@
 			{{a}}
 			{{b}}
 			<ul>
-				<li v-for="item in c">{{item}}</li>
+				<li v-for="(item,index) in c" :key='index'>{{item}}-{{index}}</li>
+			</ul>
+			<ul>
+				<li v-for="(value,key) in d" :key='key'>{{key}}-{{value}}</li>
 			</ul>
 			<button @click="add()">+</button>
 		</div>
@@ -20,16 +23,16 @@
 					return {
 						a: 1,
 						b: 2,
-						c:[1,2,3]
+						c:[1,2,3],
+						d:{
+							name:'zhangsan',
+							age:13
+						}
 					}
 				},
 				methods:{
 					add:function (){
 						this.b += 4;
-						console.log(this.b)
-						this.$nextTick(()=>{
-							console.log(this.b)
-						})
 					}
 				}
 			}).$mount('#app')
@@ -38,7 +41,11 @@
 			
 			vm.$set(vm.c,0,3)
 			
-			vm.c.splice(2)
+			//vm.c.splice(2)
+			setTimeout(()=>{
+				vm.$set(vm.d,'sex','man')
+				vm.$set(vm.d,'age',15)
+			},1000)
 
 		</script>
 	</body>

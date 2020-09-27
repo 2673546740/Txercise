@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var obj = {
+				name:'zhangsan',
+				age:123,
+				say(){
+					console.log('hello')
+				}
+			}
+			
+			var newObj = {...obj};
+			
+			console.log(newObj)
+			
+			obj.name = 'lisi';
+			
+			console.log(obj,newObj)
+		</script>
+	</body>
+</html>

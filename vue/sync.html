@@ -4,22 +4,58 @@
 	<meta charset="UTF-8">
 	<title></title>
 	<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+	<style type="text/css">
+		.activeClass{
+			color: red;
+		}
+		textarea{
+			width: 100%;
+			height: 100px;
+			resize: none;
+		}
+	</style>
 </head>
 <body>
 	<div id="app">
-		<button @click="changeTitle">修改title</button>
+		<button @click.once="changeTitle($event)">修改title</button>
 		<my-title :titles.sync='title'></my-title>
+		<textarea rows="" cols="" v-model="textareaValue" @input="textareaValueChange"></textarea>
 	</div>
 	<script type="text/javascript">
 		var vm = new Vue({
 			data(){
 				return {
-					title:'标题'
+					title:'标题',
+					textareaValue:'',
+					myMsg:'我是父组件消息'
 				}
 			},
+			// render(h) {
+			// 	return h(
+			// 	   'p',
+			// 	   {
+			// 		   class:[
+			// 			   'activeClass'
+			// 		   ],
+			// 		   on:{
+			// 			   click:()=>{
+			// 				   console.log('你好')
+			// 			   }
+			// 		   },
+			// 		   props:{
+			// 			   'myMsg':'myMsg'
+			// 		   }
+			// 	   },
+			// 		'你好，'+this.myMsg
+			// 	)
+			// }
 			methods:{
-				changeTitle(){
+				changeTitle(event){
+					console.log(event)
 					this.title = 'new Title'
+				},
+				textareaValueChange(){
+					console.log(this.textareaValue.split('\n'))
 				}
 			},
 			components:{
@@ -29,7 +65,17 @@
 						titles:{
 							type:String,
 							default:''
+						},
+						money:{
+							type:Object,
+							default(){
+								return{
+									size:100,
+									numbers:5
+								}
+							}
 						}
+						
 					},
 					methods:{
 						changeTitle(){
@@ -40,7 +86,7 @@
 				}
 			}
 		}).$mount('#app')
-		
+		console.log(vm)
 		vm.$nextTick(()=>{
 			console.log('更新')
 		})

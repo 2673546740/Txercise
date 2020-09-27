@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			class People{
+				name
+				age
+				constructor(name,age) {
+				    
+					this.name = name
+					this.age = age
+					
+					console.log(`my name is ${this.name},and i am ${this.age} yearsold`);
+				}
+				
+				run(){
+					console.log(`${this.name} is running`);
+				}
+				
+				say(){
+					console.log(`${this.name} is say Hello`);
+				}
+			}
+			
+			class Man extends People{
+				constructor(name,age){ 
+					super(name,age)
+				}
+				
+				smoking(){
+					super.say()
+					// console.log(`${this.name} is smoking, and he is only ${this.age} yearsold`);
+				}
+			}
+			
+			var myFun = new People('zhangsan',5);
+			
+			var man = new Man('lisi',4)
+			
+			man.smoking();
+			
+			man.run();
+			
+		</script>
+	</body>
+</html>
