@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.myButton{
+				color: red;
+			}
+			.myBtn{
+				font-weight: bold;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			{{msg}}
+			{{people.name}}
+			{{people.age}}
+			{{newMsg}}
+			<button type="button" @click="change()">点击</button>
+			
+			<my-button class='myButton'></my-button>
+			
+			<new-btn></new-btn>
+		</div>
+		<script type="text/javascript">
+			
+			Vue.component('newBtn',{
+				template:`<div>新按钮</div>`
+			})
+			
+			var vm = new Vue({
+				data:{
+					msg:'hello',
+					people:{
+						name:'zhangsan'
+					}
+				},
+				mounted() {
+					setTimeout(()=>{
+						this.people.age = 23
+						// this.$nextTick(()=>{
+						// 	this.$forceUpdate()
+						// })
+						// Vue.set(this.people,'age',23)
+					},3000)
+				},
+				components:{
+					'my-button':{
+						template:`<div class='myBtn'>我的按钮</div>`
+					}
+				},
+				methods:{
+					change(){
+						this.msg = 'hello world';
+						this.people.name = 'lisi'
+						console.log(this.people)
+					}
+				},
+				computed:{
+					newMsg(){
+						return this.msg.toUpperCase();
+					}
+				},
+				watch:{
+					'people.name'(){
+						console.log('gaibian')
+					}
+				}
+			}).$mount('#app')
+			
+			// vm.people.age = 23
+			// Vue.set(vm.people,'age',23)
+		</script>
+	</body>
+</html>

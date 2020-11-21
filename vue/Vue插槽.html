@@ -4,6 +4,14 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.fades-enter-active, .fades-leave-active {
+			  transition: opacity .5s;
+			}
+			.fades-enter, .fades-leave-to {
+			  opacity: 0;
+			}
+		</style>
 	</head>
 	<body>
 		<div id="app">
@@ -12,16 +20,39 @@
 				<button slot='left' @click="left" >{{msg}}</button>
 				<button slot='right'>右按钮</button>
 			</my-header>
-			<my-content><span slot="mySlot">我是新的内容</span></my-content>
+			<button @click="show=!show">显示</button>
+			<button @click="sum">增加</button>
+			<transition name="fades">
+			    <p v-show='show'>动画组件</p>
+			</transition>
+			<span ref='mySpan'>{{count}}</span>
+			<my-content><span slot="mySlot"><button type="button" style="background-color: red;border: none;">插槽按钮</button></span></my-content>
 		</div>
 		<script type="text/javascript">
 			Vue.component('my-content', {
-				template: `<div>我是内容组件<slot name='mySlot'></slot></div>`
+				template: `<div>我是内容组件<slot name='mySlot'></slot></div>`,
+				data(){
+					return {
+						show:false,
+						count:0
+					}
+				}
 			})
 			var vm = new Vue({
 				el: "#app",
 				data: {
-					msg: 'hello'
+					msg: 'hello',
+					show:false,
+					count:0
+				},
+				beforeUpdate() {
+					alert('即将更新')
+				},
+				updated() {
+					console.log('更新了')
+				},
+				mounted() {
+					this.$refs.mySpan.style.color = 'red'
 				},
 				components: {
 					'my-header': {
@@ -40,6 +71,9 @@
 				methods: {
 					left: function() {
 						console.log(this)
+					},
+					sum(){
+						this.count += 1
 					}
 				},
 			})

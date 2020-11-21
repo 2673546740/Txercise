@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			.box{
+				display: flex;
+				display: -webkit-flex;
+				width: 100%;
+				height: 500px;
+				border: 1px solid red;
+				align-items: center;
+			}
+			.inner{
+				flex: 1;
+				border: 1px solid black;
+				height: 200px;
+				display: flex;
+				flex-direction: column;
+			}
+			.maxInner{
+				flex: 2;
+				border: 1px solid black;
+				height: 200px;
+			}
+			.out{
+				flex: 1;
+				border: 1px solid cyan;
+				height: 200px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="maxInner"></div>
+			<div class="inner">
+				<div class="out"></div>
+				<div class="out"></div>
+			</div>
+			<div class="inner">
+				<div class="out"></div>
+				<div class="out"></div>
+			</div>
+		</div>
+	</body>
+</html>

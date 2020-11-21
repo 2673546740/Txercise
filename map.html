@@ -20,9 +20,27 @@
 			
 			var newObj = obj.map((item,index)=>{
 				if (item.age > 15) {
-					
+					console.log(item)
 				}
 			})
+			
+			console.log( 0.1+0.2 == 0.3 )
+			
+			/*
+			引用类型和值类型
+			值类型有 string number boolean null undefind
+			引用类型 object Function array
+			*/
+			var a = 'hello';
+			    b = a;
+				
+				a = 'hello word';
+				console.log(b);
+				
+			var c = {name:'zhangsan',age:14};
+				d = JSON.parse(JSON.stringify(c));
+				c.age = 15;
+				console.log(d);
 		</script>
 	</body>
 </html>

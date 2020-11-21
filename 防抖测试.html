@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="jquery-3.3.1.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			div{
+				height: 2200px;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="text" name="" id="" value="" />
+		<div></div>
+		<script type="text/javascript">
+			
+			$('input').on('input',debounce(handle,500))
+			
+			// 防抖
+			function debounce(fn,wait) {
+			    var timeout = null;
+			    return function() {        
+			        if(timeout !== null)   clearTimeout(timeout);        
+			        timeout = setTimeout(fn,wait);    
+			    }
+			}
+			/**
+			 * 执行函数
+			 */
+			function handle(){
+				console.log('可以发起请求')
+			}
+			// 滚动事件
+			window.addEventListener('scroll', debounce(handle,500));
+		</script>
+	</body>
+</html>
