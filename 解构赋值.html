@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			const man = {
+				name:'zhangsan',
+				age:14,
+				sex:'man',
+				height:180,
+				smoking:{
+					time:18,
+					times:5
+				}
+			}
+			
+			const woman = {}
+			
+			/**
+			 * Object.assign() 如果拷贝对象只有一层（即简单的键值对）为深拷贝，如果拷贝对象有多层为浅拷贝
+			 */
+			Object.assign(woman,man)
+			
+			woman.smoking.time = 2
+			
+			console.log(man)
+			/**
+			 * 前边的为对象中的属性，后边的为属性的别名
+			 * height:hei
+			 */
+			const {name,age,sex,height:hei} = man;
+			
+			console.log(hei)
+			
+			
+			var arr = [1,2,3,4,5,6]
+			
+			function sum(...arr){
+				var sum = 0;
+				arr.forEach((value,index)=>{
+					sum += value
+				})
+				return sum;
+			}
+			console.log(sum(1,2,3,4,5,6,7,8,9))
+			
+			
+			function sayHello(obj){
+				var {name='zhangsan',age='14'} = obj
+				
+				console.log(`my name is ` + name + `, i am ` + age + ` years old`)
+			}
+			
+			sayHello({name:'lisi',age:15})
+			
+			function jiegoufuzhi(){
+				var a = 1;
+					b = 2;
+				
+				[a,b] = [b,a];
+				
+				console.log(a,b)
+			}
+			
+			jiegoufuzhi()
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var man = {
+				name: 'zhangsan',
+				age: 24,
+				sex: 'man',
+				student: {
+					name: 'lisi',
+					age: 12,
+					sex: 'man'
+				},
+				say() {
+					console.log('hello ' + this.sex)
+				}
+			}
+
+
+			function deepClone(obj) {
+
+				var newObj = {}
+
+				for (let key in obj) {
+					if (typeof(obj[key]) == 'object') {
+						newObj[key] = deepClone(obj[key])
+					} else {
+						newObj[key] = obj[key]
+					}
+				}
+				return newObj
+			}
+
+			var arr = []
+
+			console.log(typeof(arr))
+			console.log(typeof(deepClone()))
+
+
+			var woman = deepClone(man)
+			
+			woman.sex = 'woman'
+			
+			man.say()
+			
+			woman.say()
+			
+			man.say.apply(woman)
+
+			man.student.age = 14
+
+			console.log(woman)
+
+			// var _student = JSON.parse(JSON.stringify(man));
+
+			// man.student.age = 14
+
+			// console.log(_student)
+		</script>
+	</body>
+</html>

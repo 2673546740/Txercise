@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			.container{
+				width: 150px;
+				height: 150px;
+				border: 1px solid black;
+				border-radius: 50%;
+				margin: 200px auto;
+				overflow: hidden;
+			}
+			.content{
+				width: 200px;
+				height: 200px;
+				background-color: #00FFFF;
+				margin-top: 90px;
+				position: relative;
+				right: 25px;
+				border-radius: 85px;
+				animation: rotates 3s linear infinite;
+			}
+			@keyframes rotates{
+				from{
+					transform: rotate(0deg);
+				}
+				to{
+					transform: rotate(360deg);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="content"></div>
+		</div>
+		<table>
+			<tr>
+				<th colspan="4">Header</th>
+			</tr>
+			<tr>
+				<td>Data</td>
+				<td>Data</td>
+				<td>Data</td>
+				<td>Data</td>
+			</tr>
+			<tr>
+				<td>Data</td>
+				<td>Data</td>
+				<td>Data</td>
+				<td>Data</td>
+			</tr>
+		</table>
+	</body>
+</html>

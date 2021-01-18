@@ -21,6 +21,51 @@
 			obj.name = 'lisi';
 			
 			console.log(obj,newObj)
+			
+			
+			function Animal(name,weight){
+				return {
+					name,
+					weight,
+					say(){
+						console.log('i am ' + name)
+					}
+				}
+			}
+			
+			var dog = Animal('狗',50);
+			
+			console.log(dog)
+			
+			var mao = new Animal('猫',30);
+			
+			console.log(mao)
+			
+			function animal(name,weight){
+				this.name = name;
+				this.weight = weight;
+				this.say = function(){	
+					console.log('i am ' + name)
+				}
+			}
+			animal.prototype.run = function(){
+				console.log('i am running' + this.name)
+			}
+			var ji =new animal('鸡',10);
+			ji.say()
+			ji.run()
+			var gou =new animal('狗',10);
+			gou.say()
+			gou.run()
+			
+			console.log(ji.say() == gou.say())
+			console.log(ji.run() == gou.run())
+			
+			var student = {
+				name:'张三'
+			}
+			animal.prototype.run.call(student)
+
 		</script>
 	</body>
 </html>

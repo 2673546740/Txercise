@@ -30,16 +30,24 @@
 						}
 					}
 				},
+				mounted() {
+					this.a = 3;
+				},
 				methods:{
 					add:function (){
 						this.b += 4;
 					}
+				},
+				updated() {
+					console.log('更新')
 				}
 			}).$mount('#app')
 			
 			vm.c[0] = 2
 			
 			vm.$set(vm.c,0,3)
+			
+			console.log(vm)
 			
 			//vm.c.splice(2)
 			setTimeout(()=>{

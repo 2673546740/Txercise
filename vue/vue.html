@@ -88,8 +88,11 @@
 					`<div>
 						aaa {{$route.params.id}}
 						<router-view></router-view>
-					</div>
-				`};
+					</div>`,
+					mounted(){
+						console.log(this.$route.query)
+					}
+					};
 			const b = {template:
 					`<div>
 						bbb {{$route.params.id}}

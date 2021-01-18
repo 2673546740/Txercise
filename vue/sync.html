@@ -20,6 +20,9 @@
 		<button @click.once="changeTitle($event)">修改title</button>
 		<my-title :titles.sync='title'></my-title>
 		<textarea rows="" cols="" v-model="textareaValue" @input="textareaValueChange"></textarea>
+		<select>
+			<option v-for="item in data" :value ="item.id">{{item.name}}</option>
+		</select>
 	</div>
 	<script type="text/javascript">
 		var vm = new Vue({
@@ -27,7 +30,13 @@
 				return {
 					title:'标题',
 					textareaValue:'',
-					myMsg:'我是父组件消息'
+					myMsg:'我是父组件消息',
+					data:[
+						{id:1,name:'zhangsan'},
+						{id:2,name:'zhangsan'},
+						{id:3,name:'zhangsan'}
+						
+					]
 				}
 			},
 			// render(h) {

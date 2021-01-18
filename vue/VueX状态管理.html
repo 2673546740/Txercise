@@ -15,19 +15,25 @@
 		<button @click="Add">增加</button>
 		<button @click="Reduce">减少</button>
 		<button @click="Length">长度</button>
+		<button @click="console">输出</button>
+		
+		<div>{{max}}</div>
 	</div>
 	<script type="text/javascript">
 		
 		var store = new Vuex.Store({
 			state:{
 				count:0,
-				msg:'helloWorld Vuex'
+				msg:'hello Vuex'
 			},
 			getters:{
 				CountLength(state,getters){
 					console.log(state)
 					console.log(getters)
 					return state.msg.length
+				},
+				Sum(state,getters){
+					return state.count + getters.CountLength
 				}
 			},
 			mutations:{
@@ -40,14 +46,19 @@
 			},
 			actions:{
 				Add(ctx) {
+					console.log(ctx)
 					setTimeout(function () {
 						ctx.commit('zengjia')
 					},1000)
 				},
-				Reduce(ctx){
-					setTimeout(function () {
-						ctx.commit('jianshao')
+				Reduce({commit}){
+					setTimeout(()=>{
+						console.log(commit)
+						commit('jianshao')
 					},1000)
+					// setTimeout(function () {
+					// 	ctx.commit('jianshao')
+					// },1000)
 				}
 			}
 		});
@@ -57,6 +68,9 @@
 			computed:{
 				sum:function () {
 					return store.state.count;
+				},
+				max:function(){
+					return store.getters.Sum
 				}
 			},
 			components:{
@@ -86,7 +100,15 @@
 				},
 			    Length(){
 			    	console.log(this.$store.getters.CountLength)
-			    }
+			    },
+				console(){
+					console.log(this)
+				}
+			},
+			watch:{
+				'sum':function(sum){
+					console.log('sum 改变了',sum)
+				}
 			}
 		}).$mount("#app");
 	</script>

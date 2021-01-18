@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				height: 2000px;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			
+		</div>
+		<script type="text/javascript">
+			function throttle(fn,delay){
+				let valid = true;
+				return ()=>{
+					if (!valid) {
+						return false
+					} 
+					valid = false
+					setTimeout(()=>{
+						fn();
+						valid = true
+					},delay)
+				}
+			}
+			
+			function showTop(){
+				console.log('节流');
+			}
+			
+			window.onscroll = throttle(showTop, 2000)
+			
+			var answer = window.confirm('Do you really want to leave? you have unsaved changes!')
+			console.log(answer)
+		</script>
+	</body>
+</html>

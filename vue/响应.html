@@ -41,10 +41,10 @@
 				mounted() {
 					setTimeout(()=>{
 						this.people.age = 23
-						// this.$nextTick(()=>{
-						// 	this.$forceUpdate()
-						// })
-						// Vue.set(this.people,'age',23)
+						this.$nextTick(()=>{
+							this.$forceUpdate()
+						})
+						Vue.set(this.people,'age',23)
 					},3000)
 				},
 				components:{
