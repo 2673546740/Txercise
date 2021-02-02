@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var objA = {
+				name:'zhangsan',
+				age:23,
+				class:{
+					name:'三班',
+					count:54
+				}
+			}
+			
+			var objB = Object.assign({},objA)
+			
+			objA.age = 24
+			
+			objA.class.count = 55
+			/*
+				Object.assign() 也是浅复制，只能复制简单的一层
+			*/
+			console.log(objB)
+		</script>
+	</body>
+</html>
