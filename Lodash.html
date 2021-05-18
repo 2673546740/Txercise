@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// let arr = [1,2,3,null]
+			
+			// let newArr1 = _.chunk(arr, [size=1])
+			
+			// let newArr2 = _.compact(arr)
+			
+			// console.log(arr)
+			// console.log(newArr1)
+			// console.log(newArr2)
+			
+			var users = [
+			  { 'user': 'barney',  'active': true },
+			  { 'user': 'fred',    'active': false },
+			  { 'user': 'pebbles', 'active': false }
+			];
+			
+			let a = _.dropRightWhile(users, function(o) { return !o.active; });
+			
+			let b = _.dropRightWhile(users, { 'user': 'pebbles', 'active': false });
+			
+			console.log(a)
+			console.log(b)
+		</script>
+	</body>
+</html>

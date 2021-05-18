@@ -19,6 +19,7 @@
 			
 			// 防抖
 			function debounce(fn,wait) {
+				console.log(123)
 			    var timeout = null;
 			    return ()=> {        
 			        if(timeout !== null){
@@ -35,6 +36,10 @@
 			}
 			// 滚动事件
 			window.addEventListener('scroll', debounce(handle,500));
+			
+			
+			var arr = [1,1,2,3,3,4,5]
+			console.log(new Set(arr))
 		</script>
 	</body>
 </html>

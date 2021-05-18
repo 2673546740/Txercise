@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var instance = axios.create();
+			
+			// 添加请求拦截器
+			instance.interceptors.request.use((config)=>{
+				// 在发送请求之前做些什么
+				console.log(config)
+				
+				config.timeout = 1000
+				config.headers.Authorization = 'bear asdkjahksdhkjkkshkd'
+				
+				return config;
+			}, function(error) {
+				// 对请求错误做些什么
+				return Promise.reject(error);
+			});
+
+			// 添加响应拦截器
+			instance.interceptors.response.use((response)=> {
+				// 对响应数据做点什么
+				console.log(response)
+				return response;
+			}, function(error) {
+				// 对响应错误做点什么
+				return Promise.reject(error);
+			});
+			instance.get('http://192.168.1.200:10001/api/Dic/GetEducationList')
+			
+			function a(){
+				console.log(arguments)
+			}
+			
+			a(1,1)
+		</script>
+	</body>
+</html>

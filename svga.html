@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="svga.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="demoCanvas"></div>
+		<script type="text/javascript">
+			var player = new SVGA.Player('#demoCanvas');
+			var parser = new SVGA.Parser('#demoCanvas'); 
+			parser.load('123.svga', function(videoItem) {
+			    player.setVideoItem(videoItem);
+			    player.startAnimation();
+			})
+		</script>
+	</body>
+</html>

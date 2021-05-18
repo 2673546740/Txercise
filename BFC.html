@@ -65,19 +65,33 @@
 			</div>
 		</div>
 		<div class="clumn">
-			
+			<iframe src="./123.svga" width="300" height="100"></iframe>
 		</div>
 		<script type="text/javascript">
 			var obj = {
-				name:'zhangsan'
+				name:'zhangsan',
+				address:{
+					city:'郑州',
+					provice:'河南'
+				}
 			}
-			console.log(obj['name'])
 			
-			var arr = []
+			var newObj = Object.assign({},{},obj)
 			
-			const isAllStudent =arr.length > 0? arr.every(v=>v.isStudent):false;
+			console.log(newObj)
 			
-			console.log(isAllStudent)
+			newObj.address.city = '洛阳'
+			
+			console.log(newObj,obj)
+			
+			// console.log(obj['name'])
+			
+			// var arr = []
+			
+			// const isAllStudent =arr.length > 0? arr.every(v=>v.isStudent):false;
+			
+			// console.log(isAllStudent)
+			
 		</script>
 	</body>
 </html>

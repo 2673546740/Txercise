@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// let money = 100000.01
+
+			// function abs(val) {
+			// 	var str = val.toString()
+			// 	var intSum = str.substring(0, str.indexOf(".")).replace(/\B(?=(?:\d{3})+$)/g, ','); //取到整数部分
+			// 	var dot = str.substring(str.length, str.indexOf(".")) //取到小数部分搜索
+			// 	var ret = intSum + dot;
+			// 	return ret;
+			// }
+			// console.log(abs(money));
+			
+			
+			let str = '123456789'.replace(/\B(?=(?:\d{3})+$)/g, ',')
+			console.log(str)
+		</script>
+	</body>
+</html>

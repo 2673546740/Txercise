@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			const dinner = {
+				meal: 123
+			}
+			const handler = {
+				get(target, prop, receiver) {
+					console.log(target, prop, receiver)
+					return target[prop].toString()
+				}
+			}
+			const proxy = new Proxy(dinner, handler)
+			console.log(proxy.meal)
+			
+			class People {
+				constructor(name,age,sex) {
+				    this.name = name;
+					this.age = age;
+					this.sex = sex;
+				}
+				talk(){
+					console.log('i am talking')
+				}
+			}
+			
+			class Man extends People {
+				constructor(...params) {
+				    super(...params)
+				}
+				smoking(){
+					console.log('i am smoking')
+				}
+			}
+			
+			let man = new Man('zhangsan','12','man');
+			
+			console.log(man)
+			
+			console.log(man.constructor == Man.prototype.constructor)
+			
+			man.smoking()
+			
+			man.talk()
+		</script>
+	</body>
+</html>
